@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html">
-<title>Fake Email Script</title>
+<title>Jon's Fake Email Sender</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 </head>
@@ -11,27 +12,27 @@
 
 <?php
 session_start();
-$f_Submit = filter_var($_POST['submit'],FILTER_SANITIZE_STRING);
+$f_Submit = $_POST['submit'];
 if ($f_Submit == 'Send')
 {
 if (strcmp(md5(filter_var($_POST['user_code'],FILTER_SANITIZE_STRING)),$_SESSION['ckey']))
     { 
 
-	$header = "Location: ".basename ( __FILE__,"php")."php?msg=ERROR: Invalid Verification Code";
-	header($header);
+    $header = "Location: ".basename ( __FILE__,"php")."php?msg=ERROR: Invalid Verification Code";
+    header($header);
 exit();
   }
-    //------------------ Sanitizin the Input Variables ------------------//
-	$f_fromname   = filter_var($_POST['fromname'],FILTER_SANITIZE_STRING);
-	$f_fromemail  = filter_var($_POST['fromemail'],FILTER_SANITIZE_EMAIL);
-	$f_reply      = filter_var($_POST['reply'],FILTER_SANITIZE_EMAIL);
-	$f_toemail    = filter_var($_POST['toemail'],FILTER_SANITIZE_EMAIL);
-	$f_bccemail   = filter_var($_POST['bccemail'],FILTER_SANITIZE_EMAIL);
-	$f_subject    = filter_var($_POST['subject'],FILTER_SANITIZE_STRING);
-	$f_message    = filter_var($_POST['message'],FILTER_SANITIZE_STRING);
-    $f_clno       = filter_var($_POST['clno'],FILTER_SANITIZE_NUMBER_INT);
-	//-------------------------------------------------------------------//
-	
+    //------------------ Sanitizin the Input Variables NO SANITIZE ------------------//
+    $f_fromname   = $_POST['fromname'];
+    $f_fromemail  = $_POST['fromemail'];
+    $f_reply      = $_POST['reply'];
+    $f_toemail    = $_POST['toemail'];
+    $f_bccemail   = $_POST['bccemail'];
+    $f_subject    = $_POST['subject'];
+    $f_message    = $_POST['message'];
+    $f_clno       = $_POST['clno'];
+    //-------------------------------------------------------------------//
+    
     if($f_message=="") {
         $f_message = '
             <html>
@@ -96,60 +97,60 @@ exit();
 
 
 <form action="" method="post" class="basic-grey">
-    <h1>Fake Email Script (Version 1)
+    <h1>Jon's Fake Email Script (Version 2 BETA)
         <span>Based on Fake Email Prank Script By Raman Yadav</span>
-    	<span>Please do not misuse this script.</span>
+        <span>Please do not misuse this script.</span>
     </h1>
     
-	<label>
-    	<span>From Name :</span>
+    <label>
+        <span>From Name :</span>
         <input type="text" name="fromname" ID="fn" />
     </label>
     
-	<label>
-    	<span>From Email :</span>
-		<input type="email" name="fromemail" ID="fe" />
+    <label>
+        <span>From Email :</span>
+        <input type="email" name="fromemail" ID="fe" />
     </label>
 
-	<label>
-    	<span>Reply Email :</span>
-		<input type="email" name="reply" ID="re" />
+    <label>
+        <span>Reply Email :</span>
+        <input type="email" name="reply" ID="re" />
     </label>
 
-	<label>
-    	<span>To Email :</span>
-		<input type="email" name="toemail" ID="te" />
+    <label>
+        <span>To Email :</span>
+        <input type="email" name="toemail" ID="te" />
     </label>
-	
-	<label>
-    	<span>BCC Email :</span>
-		<input type="email" name="bccemail" ID="bcc" />
+    
+    <label>
+        <span>BCC Email :</span>
+        <input type="email" name="bccemail" ID="bcc" />
     </label>
 
 
-	<label>
-    	<span>Subject :</span>
+    <label>
+        <span>Subject :</span>
         <input type="text" name="subject" ID="sb" />
     </label>
 
     <label>
-    	<span>Your Message :</span>
+        <span>Your Message :</span>
         <textarea id="message" name="message" ID="ym" ></textarea>
-    </label> 	
+    </label>    
 
-	<label>
-    	<span>Cluster Bomb :</span>
+    <label>
+        <span>Cluster Bomb :</span>
         <input type="number" name="clno" ID="cb" value="1" />
     </label>
 
-	<label>
-    	<span>Verification Code :</span>
+    <label>
+        <span>Verification Code :</span>
         <input type="vcode" name="user_code" ID="vc" />
-		<img src="capcha/png.php" align="middle">
-    </label>	
+        <img src="capcha/png.php" align="middle">
+    </label>    
 
      <label>
-    	<span>&nbsp;</span> 
+        <span>&nbsp;</span> 
         <input type="submit" class="button" name="submit" value="Send" />
     </label> 
 
